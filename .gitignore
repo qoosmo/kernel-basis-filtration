@@ -1,0 +1,21 @@
+# LaTeX build artifacts
+*.aux
+*.out
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.spl
+
+# Rust
+rust/target/
+
+# Lean / Lake
+.lake/
+build/
+
+# OS
+.DS_Store
