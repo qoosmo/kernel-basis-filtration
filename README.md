@@ -17,12 +17,12 @@ This repository studies a Boolean-indexed polynomial basis in which every basis 
 
 ## Main result
 
-Let \(N = 2^m\), let \(F\) be an arbitrary field, and index Boolean vectors by
-\(y=(y_0,\ldots,y_{m-1}) \in \{0,1\}^m\). Define
+Let $N = 2^m$, let $F$ be an arbitrary field, and index Boolean vectors by
+$y=(y_0,\ldots,y_{m-1}) \in \{0,1\}^m$. Define
 
-\[
+$$
 K_y(X)=\prod_{i=0}^{m-1}\left(X^{2^i}+y_i\right).
-\]
+$$
 
 The paper proves three structural facts.
 
@@ -30,11 +30,11 @@ The paper proves three structural facts.
 
 The family
 
-\[
+$$
 \{K_y : y\in\{0,1\}^m\}
-\]
+$$
 
-is a basis of \(F[X]_{<N}\), even though every \(K_y\) has degree exactly \(N-1\).
+is a basis of $F[X]_{<N}$, even though every $K_y$ has degree exactly $N-1$.
 
 This is deliberately unlike a degree-graded basis: low degree cannot be read off by simply asking which kernel coefficients vanish.
 
@@ -42,38 +42,38 @@ This is deliberately unlike a degree-graded basis: low degree cannot be read off
 
 For
 
-\[
+$$
 U(X)=\sum_y \lambda_y K_y(X)=\sum_a u_a X^{|a|_2},
-\]
+$$
 
 the monomial coefficients satisfy
 
-\[
+$$
 u_a=\sum_{y\ge \bar a}\lambda_y.
-\]
+$$
 
-Thus kernel coordinates and monomial coordinates are related by a Boolean zeta transform composed with the complement permutation. The inverse is Boolean Möbius inversion. Both admit \(O(N\log N)\) butterfly algorithms.
+Thus kernel coordinates and monomial coordinates are related by a Boolean zeta transform composed with the complement permutation. The inverse is Boolean Möbius inversion. Both admit $O(N\log N)$ butterfly algorithms.
 
 ### 3. Low-degree filtration in kernel coordinates
 
-Split a kernel index as \(y=(x,h)\), where \(x\in\{0,1\}^k\) and
-\(h\in\{0,1\}^{q}\) with \(q=m-k\). Then
+Split a kernel index as $y=(x,h)$, where $x\in\{0,1\}^k$ and
+$h\in\{0,1\}^{q}$ with $q=m-k$. Then
 
-\[
+$$
 \deg U < 2^k
 \quad\Longleftrightarrow\quad
 \lambda_{(x,h)}
 =
 (-1)^{q-\operatorname{wt}(h)}\mu_x
-\]
+$$
 
-for a unique function \(\mu:\{0,1\}^k\to F\).
+for a unique function $\mu:\{0,1\}^k\to F$.
 
-In characteristic two, \(-1=1\), so this becomes constancy across each high-coordinate fiber:
+In characteristic two, $-1=1$, so this becomes constancy across each high-coordinate fiber:
 
-\[
+$$
 \lambda_{(x,h)}=\mu_x.
-\]
+$$
 
 ## Why this artifact exists
 
@@ -101,11 +101,11 @@ The result is relevant to later work on FRI-style folding because folding is fun
 The Rust artifact contains deterministic executable checks for:
 
 - the exact coefficient formula;
-- naive \(O(N^2)\) vs fast \(O(N\log N)\) zeta transforms;
+- naive $O(N^2)$ vs fast $O(N\log N)$ zeta transforms;
 - naive vs fast Möbius inversion;
 - zeta/Möbius round trips;
 - both directions of the low-degree filtration theorem over the Goldilocks prime field;
-- boundary cases, including \(m=0\), \(k=m\), invalid dimensions, and characteristic two.
+- boundary cases, including $m=0$, $k=m$, invalid dimensions, and characteristic two.
 
 The committed tests are cross-checks, not a formal proof of the theorem.
 
