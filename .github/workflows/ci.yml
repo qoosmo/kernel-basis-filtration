@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    name: Rust
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Formatting
+        run: cargo fmt --manifest-path rust/Cargo.toml --all -- --check
+
+      - name: Check all targets
+        run: cargo check --manifest-path rust/Cargo.toml --all-targets --all-features
+
+      - name: Tests
+        run: cargo test --manifest-path rust/Cargo.toml --all-features
+
+      - name: Clippy
+        run: cargo clippy --manifest-path rust/Cargo.toml --all-targets --all-features -- -D warnings
+
+      - name: Compile benchmark harness
+        run: cargo build --release --manifest-path rust/Cargo.toml --bin kernel-basis-bench
+
+  lean:
+    name: Lean
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build pinned Lean/Mathlib development
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: true
+          test: false
+          use-mathlib-cache: true
+
+      - name: Report admitted proof obligations
+        shell: bash
+        run: |
+          count="$(grep -cE '^[[:space:]]*sorry[[:space:]]*$' KernelBasisFiltration.lean || true)"
+          echo "Lean formalization currently contains ${count} explicit sorry placeholder(s)."
+          echo "A green build is not a completed machine-checked proof while these remain."

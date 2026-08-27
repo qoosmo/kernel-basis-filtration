@@ -4,6 +4,7 @@ defaultTargets = ["KernelBasisFiltration"]
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
+rev = "a7cadaedd7038b547f8a2738d2789a6f0fba11de"
 
 [[lean_lib]]
 name = "KernelBasisFiltration"

@@ -1,14 +1,21 @@
 [package]
-name = "kernel-basis-bench"
+name = "kernel-basis-filtration"
 version = "0.1.0"
 edition = "2021"
+description = "Computational checks for the Boolean kernel basis and its low-degree filtration"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/qoosmo/kernel-basis-filtration"
+homepage = "https://www.algorizk.xyz"
+keywords = ["finite-fields", "polynomial", "mobius", "formal-verification", "fri"]
+categories = ["mathematics", "cryptography"]
+publish = false
 
 [lib]
-name = "kernel_basis_bench"
+name = "kernel_basis_filtration"
 path = "src/lib.rs"
 
 [[bin]]
-name = "bench"
+name = "kernel-basis-bench"
 path = "src/bin/bench.rs"
 
 [dependencies]

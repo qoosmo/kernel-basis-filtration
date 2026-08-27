@@ -11,7 +11,7 @@ machine-checked proof of the paper.
 -/
 
 import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.Degree.Definitions
+import Mathlib.Algebra.Polynomial.Degree.Defs
 import Mathlib.Algebra.Polynomial.Monic
 import Mathlib.Data.Fin.Basic
 import Mathlib.Data.Finset.Basic
@@ -19,6 +19,8 @@ import Mathlib.LinearAlgebra.LinearIndependent.Defs
 
 open Polynomial
 open BigOperators
+
+noncomputable section
 
 variable {F : Type*} [Field F]
 
@@ -40,6 +42,12 @@ def comp {m : ℕ} (y : BVec m) : BVec m :=
 /-- Coordinatewise domination `y ≥ a`. -/
 def dom {m : ℕ} (y a : BVec m) : Prop :=
   ∀ i, a i = true → y i = true
+
+/-- Boolean domination is decidable because it is a proposition over a finite
+Boolean index set. This explicit instance keeps coefficient statements
+self-contained under the pinned Lean/Mathlib environment. -/
+instance instDecidableDom {m : ℕ} (y a : BVec m) : Decidable (dom y a) :=
+  Classical.propDecidable _
 
 /-- Binary value `|a|_2`, Section 3.1. -/
 def val {m : ℕ} (a : BVec m) : ℕ :=
