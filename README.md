@@ -64,10 +64,11 @@ $h\in\{0,1\}^{q}$ with $q=m-k$. Then
 \quad\Longleftrightarrow\quad
 \lambda_{(x,h)}
 =
-(-1)^{q-\operatorname{wt}(h)}\mu_x
+(-1)^{q-\mathrm{wt}(h)}\mu_x
 ```
 
-for a unique function $\mu:\{0,1\}^k\to F$.
+where $\mathrm{wt}(h)$ denotes the Hamming weight of $h$, and
+$\mu:\{0,1\}^k\to F$ is uniquely determined.
 
 In characteristic two, $-1=1$, so this becomes constancy across each high-coordinate fiber:
 
